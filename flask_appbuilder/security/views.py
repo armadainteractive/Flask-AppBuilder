@@ -674,7 +674,7 @@ class AuthOAuthView(AuthView):
     @expose("/oauth-authorized/<provider>")
     def oauth_authorized(self, provider):
         log.debug("Authorized init")
-        resp = self.appbuilder.sm.oauth_remotes[provider].authorized_response()
+        resp = self.appbuilder.sm.oauth_remotes['google'].authorized_response()
         if resp is None:
             flash(u"You denied the request to sign in.", "warning")
             return redirect("login")
@@ -722,7 +722,7 @@ class AuthOAuthView(AuthView):
             except (KeyError, IndexError):
                 next_url = self.appbuilder.get_url_for_index
 
-            return redirect(next_url)
+            return redirect("/superset/welcome")
 
 
 class AuthRemoteUserView(AuthView):
